@@ -20,7 +20,7 @@
 @synthesize tiles = _tiles;
 @synthesize board = _board;
 @synthesize tileSize = _tileSize;
-@synthesize delegate;
+@synthesize delegate = _delegate;
 
 - (id)initWithImage:(UIImage *)image andSize:(NSInteger)size withFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -82,8 +82,7 @@
     }
     
     [self play];
-    
-    NSLog(@"delegate %@", delegate);
+    //NSLog(@"delegate %@", delegate);
 }
 
 - (void)play {
@@ -92,7 +91,7 @@
 }
 
 - (void)drawPuzzle {
-    for (UIView *view in self.subviews) {
+    for (id view in self.subviews) {
         [view removeFromSuperview];
     }
     
@@ -147,8 +146,8 @@
                          if ((finished) && [_board isBoardFinished]) {
                              NSLog(@"board is finished");
                              
-                             if(delegate) {
-                                 [delegate puzzleFinished];
+                             if(self.delegate) {
+                                 [self.delegate puzzleFinished];
                              }
                          }
                      }];    

@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "IAPuzzleBoardDelegate.h"
 
+#define SHUFFLE_TIMES   100
+#define SHUFFLE_SIZE    5
+
 @class IAPuzzleBoard;
 
 @interface IAPuzzleBoardView : UIView {
-    id <IAPuzzleBoardDelegate> delegate;
+    id <IAPuzzleBoardDelegate> _delegate;
     CGFloat _tileSize;
     IAPuzzleBoard *_board;
     NSMutableArray *_tiles;

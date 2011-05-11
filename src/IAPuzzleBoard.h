@@ -14,8 +14,6 @@
 #define DOWN 3
 #define LEFT 4
 
-#define SHUFFLE_TIMES 3
-
 
 @interface IAPuzzleBoard : NSObject {
     NSInteger _size;
