@@ -17,4 +17,3 @@ build/*
 *.pbxuser
 *.xcworkspace
 xcuserdata
-/Slize/Slize.xcodeproj/project.pbxproj
