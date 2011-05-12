@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IAPuzzleBoardDelegate.h"
 
-#define SHUFFLE_TIMES   100
-#define SHUFFLE_SIZE    5
+#define SHUFFLE_TIMES   100 // amount of shuffling // jumlah berapa kali acak
+#define BOARD_SIZE      4   // size of the board // ukuran dari 
 
 @class IAPuzzleBoard;
+
+@protocol IAPuzzleBoardDelegate;
 
 @interface IAPuzzleBoardView : UIView {
     id <IAPuzzleBoardDelegate> _delegate;
@@ -21,16 +22,35 @@
     NSMutableArray *_tiles;
 }
 
-@property (retain) IBOutlet id <IAPuzzleBoardDelegate> delegate;
+@property (nonatomic, retain) IBOutlet id <IAPuzzleBoardDelegate> delegate;
 @property CGFloat tileSize;
 @property (nonatomic, retain) IAPuzzleBoard *board;
 @property (nonatomic, retain) NSMutableArray *tiles;
 
-
+/*
+ Initialize this view with image, size of the board, and frame size in the controller. This initializer can be used when you make this using code not from IB. (image, size, frame)
+ Inisialisasi view ini dengan image, ukuran papan dan ukuran frame di controller. Inisialisasi ini digunakan bila membuat dengan kode, bukan IB. (image, size, frame)
+*/
 - (id)initWithImage:(UIImage *)image andSize:(NSInteger)size withFrame:(CGRect)frame;
+
+/*
+ Method to start playing the puzzle. This should be used when you initiliazed the board with IB (image, size)
+ Prosedur untuk memulai memainkan puzzle. Ini digunakakn ketika papan dibuat menggunakan IB. (image, size)
+*/
 - (void)playWithImage:(UIImage *)image andSize:(NSInteger)size;
+
+/*
+ Shuffle the board (SHUFFLE_TIMES) times, and then draw the puzzle board.
+ Acak papan sebanyak SHUFFLE_TIMES kali, dan gambar papan puzzle.
+*/
 - (void)play;
 
 @end
 
-
+@protocol IAPuzzleBoardDelegate
+/*
+ This delegate method is fired when the puzzle board is finished
+ Prosedur delegasi ini dipanggil bila papan tersebut telah selesai dimainkan
+*/
+- (void)puzzleFinished;
+@end

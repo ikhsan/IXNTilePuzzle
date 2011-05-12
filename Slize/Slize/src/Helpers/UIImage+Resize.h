@@ -1,5 +1,5 @@
 //
-//  IAPuzzleBoardDelegate.h
+//  UIImage+Resize.h
 //  Slize
 //
 //  Created by Ikhsan Assaat on 5/11/11.
@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 
-@protocol IAPuzzleBoardDelegate
-- (void)puzzleFinished;
+@interface UIImage (Resize)
+
+- (UIImage*) resizedImageWithSize:(CGSize)size;
+
 @end

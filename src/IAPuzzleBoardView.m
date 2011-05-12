@@ -8,6 +8,7 @@
 
 #import "IAPuzzleBoardView.h"
 #import "IAPuzzleBoard.h"
+#import "UIImage+Resize.h"
 
 @interface IAPuzzleBoardView (Private)
 - (void)moveTile:(UIImageView *)tile withDirection:(int)direction;
@@ -22,6 +23,10 @@
 @synthesize tileSize = _tileSize;
 @synthesize delegate = _delegate;
 
+/*
+ Initialize this view with image, size of the board, and frame size in the controller. This initializer can be used when you make this using code not from IB. (image, size, frame)
+ Inisialisasi view ini dengan image, ukuran papan dan ukuran frame di controller. Inisialisasi ini digunakan bila membuat dengan kode, bukan IB. (image, size, frame)
+*/
 - (id)initWithImage:(UIImage *)image andSize:(NSInteger)size withFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {        
@@ -29,7 +34,8 @@
         self.board = board;
         [board release];
         
-        _tileSize = image.size.width/size;
+        UIImage *resizedImage = [image resizedImageWithSize:frame.size];
+        _tileSize = resizedImage.size.width/size;
         
         _tiles = [[NSMutableArray alloc] init];
         for (int i = 0; i < _board.size; i++) {
@@ -40,7 +46,7 @@
                 
                 CGRect frame = CGRectMake(_tileSize*j, _tileSize*i, _tileSize, _tileSize);
                 
-                CGImageRef tileImageRef = CGImageCreateWithImageInRect(image.CGImage, frame);
+                CGImageRef tileImageRef = CGImageCreateWithImageInRect(resizedImage.CGImage, frame);
                 UIImage *tileImage = [UIImage imageWithCGImage:tileImageRef];
                 
                 UIImageView *tileImageView = [[UIImageView alloc] initWithImage:tileImage];
@@ -54,12 +60,17 @@
     return self;
 }
 
+/*
+ Method to start playing the puzzle. This should be used when you initiliazed the board with IB (image, size)
+ Prosedur untuk memulai memainkan puzzle. Ini digunakakn ketika papan dibuat menggunakan IB. (image, size)
+*/
 - (void)playWithImage:(UIImage *)image andSize:(NSInteger)size {
     IAPuzzleBoard *board = [[IAPuzzleBoard alloc] initWithSize:size];
     self.board = board;
     [board release];
     
-    _tileSize = image.size.width/size;
+    UIImage *resizedImage = [image resizedImageWithSize:self.frame.size];
+    _tileSize = resizedImage.size.width/size;
     
     _tiles = [[NSMutableArray alloc] init];
     for (int i = 0; i < _board.size; i++) {
@@ -70,7 +81,7 @@
             
             CGRect frame = CGRectMake(_tileSize*j, _tileSize*i, _tileSize, _tileSize);
             
-            CGImageRef tileImageRef = CGImageCreateWithImageInRect(image.CGImage, frame);
+            CGImageRef tileImageRef = CGImageCreateWithImageInRect(resizedImage.CGImage, frame);
             UIImage *tileImage = [UIImage imageWithCGImage:tileImageRef];
             
             UIImageView *tileImageView = [[UIImageView alloc] initWithImage:tileImage];
@@ -82,14 +93,21 @@
     }
     
     [self play];
-    //NSLog(@"delegate %@", delegate);
 }
 
+/*
+ Shuffle the board (SHUFFLE_TIMES) times, and then draw the puzzle board.
+ Acak papan sebanyak SHUFFLE_TIMES kali, dan gambar papan puzzle.
+*/
 - (void)play {
     [_board shuffle:SHUFFLE_TIMES];
     [self drawPuzzle];
 }
 
+/*
+ Method for drawing the coresponding tiles from the board model
+ Prosedur untuk menggambar petak-petak yang bersesuaian dengan board model
+*/
 - (void)drawPuzzle {
     for (id view in self.subviews) {
         [view removeFromSuperview];
@@ -111,15 +129,13 @@
             [self addSubview:tileImageView];
         }
     }
-    
-    //NSLog(@"%@", _board);
 }
 
+/*
+ Method for moving the tile with animation (tile, direction)
+ Prosedur untuk menggerakkan petak dengan animasi (tile, direction)
+*/
 - (void)moveTile:(UIImageView *)tile withDirection:(int)direction {
-    
-    //NSLog(@"delegate %@", delegate);
-    
-    
     CGRect newFrame;
     switch (direction) {
         case UP :
@@ -153,13 +169,15 @@
                      }];    
 }
 
+/*
+ Method for moving the tile, if its valid then move the tile in the model and view. (tilePoint)
+ Prosedur untuk menggerakkan petak, bila valid maka gerakkan petak tersebut di model dan view-nya. (tilePoint)
+*/
 - (void)movingThisTile:(CGPoint)tilePoint {
     UIImageView *tileView = nil;
-    
     CGRect checkRect = CGRectMake((tilePoint.x-1)*_tileSize + 10, 
                                   (tilePoint.y-1)*_tileSize + 10, 
                                   1.0, 1.0);
-    
     for (UIImageView *enumTile in _tiles) {
         if  (CGRectIntersectsRect(enumTile.frame, checkRect)) {
             tileView = enumTile;
@@ -168,7 +186,6 @@
     }
     
     int move = [_board validMove:tilePoint];
-    
     CGPoint neighborPoint;
     switch (move) {
         case UP:
@@ -197,6 +214,9 @@
     }
 }
 
+/*
+ Method to check every touch
+*/
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     
@@ -207,6 +227,9 @@
     [self movingThisTile:CGPointMake(x, y)];    
 }
 
+/*
+ Overiding dealloc method
+*/
 - (void)dealloc
 {
     self.delegate = nil;

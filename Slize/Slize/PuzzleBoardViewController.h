@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IAPuzzleBoardDelegate.h"
 #import "IAPuzzleBoardView.h"
 
 @interface PuzzleBoardViewController : UIViewController <IAPuzzleBoardDelegate> {
@@ -19,6 +18,10 @@
 @property (nonatomic, retain) IBOutlet IAPuzzleBoardView *board;
 @property (nonatomic, retain) IBOutlet UIButton *startButton;
 
+/*
+ Well, it's for... starting this puzzle game. What else?
+ Untuk... memulai bermain puzzle lah.
+*/
 - (IBAction)start:(id)sender;
 
 @end

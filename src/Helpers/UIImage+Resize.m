@@ -11,8 +11,7 @@
 
 @implementation UIImage (Resize)
 
-- (UIImage*) resizedImageWithSize:(CGSize)size
-{
+- (UIImage*) resizedImageWithSize:(CGSize)size {
     UIGraphicsBeginImageContext(size);
     
     [self drawInRect:CGRectMake(0.0f, 0.0f, size.width, size.height)];
