@@ -235,7 +235,8 @@
             }
         }
         
-        // pick every 
+        // pick one of the tile randomly
+        // pilih secara acak petak yang bisa digerakkan
         NSInteger pick = random()%[validMoves count];
         CGPoint moveThisTile = [(NSValue *)[validMoves objectAtIndex:pick] CGPointValue];
         [self moveTile:moveThisTile];

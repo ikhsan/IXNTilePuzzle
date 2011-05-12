@@ -34,6 +34,7 @@
     // show the full image first in the view
     // tunjukkan dulu gambar penuh di view  
     UIImageView *fullImage = [[UIImageView alloc] initWithImage:gambar];
+    fullImage.frame = board.bounds;
     [board addSubview:fullImage];
     [fullImage release];
 }
@@ -97,7 +98,7 @@
 }
 
 
-#pragma mark - Create puzzle
+#pragma mark - IB Actions
 /*
  Well, it's for... starting this puzzle game. What else?
  Untuk... memulai bermain puzzle lah.
