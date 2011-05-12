@@ -16,14 +16,17 @@
 @protocol IAPuzzleBoardDelegate;
 
 @interface IAPuzzleBoardView : UIView {
+    CGFloat _tileWidth;
+    CGFloat _tileHeight;
+    
     id <IAPuzzleBoardDelegate> _delegate;
-    CGFloat _tileSize;
     IAPuzzleBoard *_board;
     NSMutableArray *_tiles;
 }
 
+@property CGFloat tileWidth;
+@property CGFloat tileHeight;
 @property (nonatomic, retain) IBOutlet id <IAPuzzleBoardDelegate> delegate;
-@property CGFloat tileSize;
 @property (nonatomic, retain) IAPuzzleBoard *board;
 @property (nonatomic, retain) NSMutableArray *tiles;
 

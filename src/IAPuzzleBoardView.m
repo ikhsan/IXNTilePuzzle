@@ -20,8 +20,9 @@
 
 @synthesize tiles = _tiles;
 @synthesize board = _board;
-@synthesize tileSize = _tileSize;
 @synthesize delegate = _delegate;
+@synthesize tileWidth = _tileWidth;
+@synthesize tileHeight = _tileHeight;
 
 /*
  Initialize this view with image, size of the board, and frame size in the controller. This initializer can be used when you make this using code not from IB. (image, size, frame)
@@ -35,7 +36,8 @@
         [board release];
         
         UIImage *resizedImage = [image resizedImageWithSize:frame.size];
-        _tileSize = resizedImage.size.width/size;
+        _tileWidth = resizedImage.size.width/size;
+        _tileHeight = resizedImage.size.height/size;
         
         _tiles = [[NSMutableArray alloc] init];
         for (int i = 0; i < _board.size; i++) {
@@ -44,7 +46,7 @@
                     continue;
                 }
                 
-                CGRect frame = CGRectMake(_tileSize*j, _tileSize*i, _tileSize, _tileSize);
+                CGRect frame = CGRectMake(_tileWidth*j, _tileHeight*i, _tileWidth, _tileHeight);
                 
                 CGImageRef tileImageRef = CGImageCreateWithImageInRect(resizedImage.CGImage, frame);
                 UIImage *tileImage = [UIImage imageWithCGImage:tileImageRef];
@@ -70,7 +72,8 @@
     [board release];
     
     UIImage *resizedImage = [image resizedImageWithSize:self.frame.size];
-    _tileSize = resizedImage.size.width/size;
+    _tileWidth = resizedImage.size.width/size;
+    _tileHeight = resizedImage.size.height/size;
     
     _tiles = [[NSMutableArray alloc] init];
     for (int i = 0; i < _board.size; i++) {
@@ -79,7 +82,7 @@
                 continue;
             }
             
-            CGRect frame = CGRectMake(_tileSize*j, _tileSize*i, _tileSize, _tileSize);
+            CGRect frame = CGRectMake(_tileWidth*j, _tileHeight*i, _tileWidth, _tileHeight);
             
             CGImageRef tileImageRef = CGImageCreateWithImageInRect(resizedImage.CGImage, frame);
             UIImage *tileImage = [UIImage imageWithCGImage:tileImageRef];
@@ -123,7 +126,7 @@
             
             UIImageView *tileImageView = [_tiles objectAtIndex:[value intValue]-1];
             
-            CGRect frame = CGRectMake(_tileSize*(i-1), _tileSize*(j-1), _tileSize, _tileSize);
+            CGRect frame = CGRectMake(_tileWidth*(i-1), _tileHeight*(j-1), _tileWidth, _tileHeight);
             tileImageView.frame = frame;
             
             [self addSubview:tileImageView];
@@ -139,16 +142,16 @@
     CGRect newFrame;
     switch (direction) {
         case UP :
-            newFrame = CGRectMake(tile.frame.origin.x, tile.frame.origin.y-_tileSize, tile.frame.size.width, tile.frame.size.height);
+            newFrame = CGRectMake(tile.frame.origin.x, tile.frame.origin.y-_tileHeight, tile.frame.size.width, tile.frame.size.height);
             break;            
         case RIGHT :
-            newFrame = CGRectMake(tile.frame.origin.x+_tileSize, tile.frame.origin.y, tile.frame.size.width, tile.frame.size.height);
+            newFrame = CGRectMake(tile.frame.origin.x+_tileWidth, tile.frame.origin.y, tile.frame.size.width, tile.frame.size.height);
             break;            
         case DOWN :
-            newFrame = CGRectMake(tile.frame.origin.x, tile.frame.origin.y+_tileSize, tile.frame.size.width, tile.frame.size.height);
+            newFrame = CGRectMake(tile.frame.origin.x, tile.frame.origin.y+_tileHeight, tile.frame.size.width, tile.frame.size.height);
             break;            
         case LEFT :
-            newFrame = CGRectMake(tile.frame.origin.x-_tileSize, tile.frame.origin.y, tile.frame.size.width, tile.frame.size.height);
+            newFrame = CGRectMake(tile.frame.origin.x-_tileWidth, tile.frame.origin.y, tile.frame.size.width, tile.frame.size.height);
             break;            
         default:
             break;
@@ -175,8 +178,8 @@
 */
 - (void)movingThisTile:(CGPoint)tilePoint {
     UIImageView *tileView = nil;
-    CGRect checkRect = CGRectMake((tilePoint.x-1)*_tileSize + 10, 
-                                  (tilePoint.y-1)*_tileSize + 10, 
+    CGRect checkRect = CGRectMake((tilePoint.x-1)*_tileWidth + 1, 
+                                  (tilePoint.y-1)*_tileHeight + 1, 
                                   1.0, 1.0);
     for (UIImageView *enumTile in _tiles) {
         if  (CGRectIntersectsRect(enumTile.frame, checkRect)) {
@@ -221,8 +224,8 @@
     UITouch *touch = [touches anyObject];
     
     CGPoint checkPoint = [touch locationInView:self];
-    int x = (checkPoint.x / _tileSize) + 1;
-    int y = (checkPoint.y / _tileSize) + 1;
+    int x = (checkPoint.x / _tileWidth) + 1;
+    int y = (checkPoint.y / _tileHeight) + 1;
     
     [self movingThisTile:CGPointMake(x, y)];    
 }
