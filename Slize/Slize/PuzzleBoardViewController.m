@@ -15,6 +15,8 @@
 - (void)dealloc {
     [board release];
     [startButton release];
+    [clickSound release];
+    [slideSound release];
     [super dealloc];
 }
 
@@ -37,6 +39,16 @@
     fullImage.frame = board.bounds;
     [board addSubview:fullImage];
     [fullImage release];
+    
+    // setting for sound effects
+    // pengaturan untuk efek suara
+    NSError *error = nil;
+    
+    NSString *pathToClick = [[NSBundle mainBundle] pathForResource:@"click" ofType:@"wav"];
+    clickSound = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:pathToClick] error:&error];
+    
+    NSString *pathToSlide = [[NSBundle mainBundle] pathForResource:@"slide" ofType:@"wav"];
+    slideSound = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:pathToSlide] error:&error];
 }
 
 - (void)viewDidUnload {
@@ -80,9 +92,7 @@
                          fullImage.alpha = 0.0;
                          [board addSubview:fullImage];
                          
-                         [UIView animateWithDuration:.4 
-                                               delay:0.0 
-                                             options:UIViewAnimationCurveEaseInOut 
+                         [UIView animateWithDuration:.4
                                           animations:^{
                                               // set the alpha of full image to 1.0
                                               // atur alpha gambar penuh tersebut menjadi 1.0
@@ -97,6 +107,10 @@
                      }];    
 }
 
+- (void)emptyTileMovedTo:(CGPoint)tilePoint {
+    step += 1;
+    [slideSound play];
+}
 
 #pragma mark - IB Actions
 /*

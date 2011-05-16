@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		063A2FA913813B770044C707 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063A2FA813813B770044C707 /* AVFoundation.framework */; };
+		063A2FAD13813C3A0044C707 /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = 063A2FAB13813C3A0044C707 /* click.wav */; };
+		063A2FAE13813C3A0044C707 /* slide.wav in Resources */ = {isa = PBXBuildFile; fileRef = 063A2FAC13813C3A0044C707 /* slide.wav */; };
 		064B0EB8137BCD27007EDAB1 /* IAPuzzleBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 064B0EB4137BCD27007EDAB1 /* IAPuzzleBoard.m */; };
 		064B0EB9137BCD27007EDAB1 /* IAPuzzleBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 064B0EB6137BCD27007EDAB1 /* IAPuzzleBoardView.m */; };
 		064B0EC6137BCE8C007EDAB1 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 064B0EC5137BCE8C007EDAB1 /* UIImage+Resize.m */; };
@@ -23,6 +26,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		063A2FA813813B770044C707 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		063A2FAB13813C3A0044C707 /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click.wav; sourceTree = "<group>"; };
+		063A2FAC13813C3A0044C707 /* slide.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = slide.wav; sourceTree = "<group>"; };
 		064B0EB3137BCD27007EDAB1 /* IAPuzzleBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPuzzleBoard.h; sourceTree = "<group>"; };
 		064B0EB4137BCD27007EDAB1 /* IAPuzzleBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPuzzleBoard.m; sourceTree = "<group>"; };
 		064B0EB5137BCD27007EDAB1 /* IAPuzzleBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPuzzleBoardView.h; sourceTree = "<group>"; };
@@ -51,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				063A2FA913813B770044C707 /* AVFoundation.framework in Frameworks */,
 				06BEB41613793B6A0074063A /* UIKit.framework in Frameworks */,
 				06BEB41813793B6A0074063A /* Foundation.framework in Frameworks */,
 				06BEB41A13793B6A0074063A /* CoreGraphics.framework in Frameworks */,
@@ -102,6 +109,7 @@
 		06BEB41413793B6A0074063A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				063A2FA813813B770044C707 /* AVFoundation.framework */,
 				06BEB41513793B6A0074063A /* UIKit.framework */,
 				06BEB41713793B6A0074063A /* Foundation.framework */,
 				06BEB41913793B6A0074063A /* CoreGraphics.framework */,
@@ -127,6 +135,8 @@
 		06BEB41C13793B6A0074063A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				063A2FAB13813C3A0044C707 /* click.wav */,
+				063A2FAC13813C3A0044C707 /* slide.wav */,
 				06BEB41D13793B6A0074063A /* Slize-Info.plist */,
 				06BEB41E13793B6A0074063A /* InfoPlist.strings */,
 				06BEB42113793B6A0074063A /* Slize-Prefix.pch */,
@@ -190,6 +200,8 @@
 				06BEB42913793B6B0074063A /* MainWindow.xib in Resources */,
 				06BEB43913793BB80074063A /* ff.png in Resources */,
 				06A8200D137AB65B007F40B1 /* PuzzleBoardViewController.xib in Resources */,
+				063A2FAD13813C3A0044C707 /* click.wav in Resources */,
+				063A2FAE13813C3A0044C707 /* slide.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,12 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 #import "IAPuzzleBoardView.h"
 
 @interface PuzzleBoardViewController : UIViewController <IAPuzzleBoardDelegate> {
     UIImage *gambar;
     IAPuzzleBoardView *board;
     UIButton *startButton;
+    
+    NSInteger step;
+    AVAudioPlayer *clickSound;
+    AVAudioPlayer *slideSound;
 }
 
 @property (nonatomic, retain) IBOutlet IAPuzzleBoardView *board;

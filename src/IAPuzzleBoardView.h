@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-#define SHUFFLE_TIMES   100 // amount of shuffling // jumlah berapa kali acak
-#define BOARD_SIZE      4   // size of the board // ukuran dari 
+#define SHUFFLE_TIMES   100     // amount of shuffling // jumlah berapa kali acak
+#define BOARD_SIZE      4       // size of the board // ukuran dari 
 
 @class IAPuzzleBoard;
 
@@ -22,6 +22,9 @@
     id <IAPuzzleBoardDelegate> _delegate;
     IAPuzzleBoard *_board;
     NSMutableArray *_tiles;
+    
+    UIImageView *_draggedTile;
+    int _direction;
 }
 
 @property CGFloat tileWidth;
@@ -56,4 +59,10 @@
  Prosedur delegasi ini dipanggil bila papan tersebut telah selesai dimainkan
 */
 - (void)puzzleFinished;
+
+/*
+ This delegate method is fired when a tile is moved
+ Prosedur delegasi ini dipanggil bila ada petak yang berhasil digerakkan
+*/
+- (void)emptyTileMovedTo:(CGPoint)tilePoint;
 @end

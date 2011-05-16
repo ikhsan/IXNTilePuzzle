@@ -6,6 +6,7 @@
 //  Copyright 2011 Beetlebox All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "IAPuzzleBoardView.h"
 #import "IAPuzzleBoard.h"
 #import "UIImage+Resize.h"
@@ -14,6 +15,8 @@
 - (void)moveTile:(UIImageView *)tile withDirection:(int)direction;
 - (void)movingThisTile:(CGPoint)tilePoint;
 - (void)drawPuzzle;
+- (void)dragging:(UIPanGestureRecognizer *)gestureRecognizer;
+- (void)tapMove:(UITapGestureRecognizer *)tapRecognizer;
 @end
 
 @implementation IAPuzzleBoardView;
@@ -31,7 +34,7 @@
 - (id)initWithImage:(UIImage *)image andSize:(NSInteger)size withFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {        
-        IAPuzzleBoard *board = [[IAPuzzleBoard alloc] initWithSize:size];
+        /*IAPuzzleBoard *board = [[IAPuzzleBoard alloc] initWithSize:size];
         self.board = board;
         [board release];
         
@@ -57,7 +60,8 @@
                 [_tiles addObject:tileImageView];
                 [tileImageView release];
             }
-        }
+        }*/
+        [self playWithImage:image andSize:size];
     }    
     return self;
 }
@@ -90,10 +94,29 @@
             UIImageView *tileImageView = [[UIImageView alloc] initWithImage:tileImage];
             CGImageRelease(tileImageRef);
             
+            [tileImageView.layer setShadowColor:[UIColor grayColor].CGColor];
+            [tileImageView.layer setShadowOpacity:0.7];
+            [tileImageView.layer setShadowRadius:1.0];
+            [tileImageView.layer setShadowOffset:CGSizeMake(0.0, 0.0)];
+            [tileImageView.layer setShadowPath:[[UIBezierPath bezierPathWithRect:tileImageView.layer.bounds] CGPath]];
+            
             [_tiles addObject:tileImageView];
             [tileImageView release];
         }
     }
+    
+    // add dragging recognizer
+    UIPanGestureRecognizer *dragGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragging:)];
+    [dragGesture setMaximumNumberOfTouches:1];
+    [dragGesture setMinimumNumberOfTouches:1];
+    [self addGestureRecognizer:dragGesture];
+    [dragGesture release];
+    
+    // add tapping recognizer
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapMove:)];
+    [tapGesture setNumberOfTapsRequired:1];
+    [self addGestureRecognizer:tapGesture];
+    [tapGesture release];
     
     [self play];
 }
@@ -173,6 +196,51 @@
 }
 
 /*
+ Method for moving the tile with animation (tile, direction)
+ Prosedur untuk menggerakkan petak dengan animasi (tile, direction)
+*/
+- (void)moveTile:(UIImageView *)tile withDirection:(int)direction fromTilePoint:(CGPoint)tilePoint {
+    int deltaX = 0;
+    int deltaY = 0;
+    
+    switch (direction) {
+        case UP : 
+            deltaY = -1; break;
+        case RIGHT : 
+            deltaX = 1; break;
+        case DOWN : 
+            deltaY = 1; break;
+        case LEFT : 
+            deltaX = -1; break;
+        default: break;
+    }
+    CGRect newFrame = CGRectMake((tilePoint.x + deltaX - 1) * _tileWidth, (tilePoint.y + deltaY - 1) * _tileHeight, tile.frame.size.width, tile.frame.size.height);
+    
+    [UIView animateWithDuration:.1 
+                          delay:0.0 
+                        options:UIViewAnimationCurveEaseOut 
+                     animations:^{
+                         tile.frame = newFrame;
+                     } 
+                     completion:^(BOOL finished){ 
+                         [tile setTransform:CGAffineTransformIdentity];   
+                         tile.frame = newFrame;
+                         
+                         if ((finished) && (direction != NONE)) {
+                             [_board swapTileAtPoint:tilePoint withPoint:CGPointMake(tilePoint.x + deltaX, tilePoint.y + deltaY)];   
+                             if (self.delegate) [self.delegate emptyTileMovedTo:tilePoint];
+                             if ([_board isBoardFinished]) {
+                                 NSLog(@"board is finished");
+                                 
+                                 if(self.delegate) {
+                                     [self.delegate puzzleFinished];
+                                 }
+                             }                             
+                         }
+                     }];
+}
+
+/*
  Method for moving the tile, if its valid then move the tile in the model and view. (tilePoint)
  Prosedur untuk menggerakkan petak, bila valid maka gerakkan petak tersebut di model dan view-nya. (tilePoint)
 */
@@ -195,39 +263,30 @@
             neighborPoint = CGPointMake(tilePoint.x, tilePoint.y-1);
             [_board swapTileAtPoint:tilePoint withPoint:neighborPoint];
             [self moveTile:tileView withDirection:UP];
+            if (self.delegate) [self.delegate emptyTileMovedTo:tilePoint];
             break;
         case RIGHT:
             neighborPoint = CGPointMake(tilePoint.x+1, tilePoint.y);
             [_board swapTileAtPoint:tilePoint withPoint:neighborPoint];
             [self moveTile:tileView withDirection:RIGHT];
+            if (self.delegate) [self.delegate emptyTileMovedTo:tilePoint];
             break;
         case DOWN:
             neighborPoint = CGPointMake(tilePoint.x, tilePoint.y+1);
             [_board swapTileAtPoint:tilePoint withPoint:neighborPoint];
             [self moveTile:tileView withDirection:DOWN];
+            if (self.delegate) [self.delegate emptyTileMovedTo:tilePoint];
             break;
         case LEFT:
             neighborPoint = CGPointMake(tilePoint.x-1, tilePoint.y);
             [_board swapTileAtPoint:tilePoint withPoint:neighborPoint];
             [self moveTile:tileView withDirection:LEFT];
+            if (self.delegate) [self.delegate emptyTileMovedTo:tilePoint];
             break;
         default:
             NSLog(@"the tile can't be moved");
             break;
     }
-}
-
-/*
- Method to check every touch
-*/
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    
-    CGPoint checkPoint = [touch locationInView:self];
-    int x = (checkPoint.x / _tileWidth) + 1;
-    int y = (checkPoint.y / _tileHeight) + 1;
-    
-    [self movingThisTile:CGPointMake(x, y)];    
 }
 
 /*
@@ -238,7 +297,117 @@
     self.delegate = nil;
     self.tiles = nil;
     self.board = nil;
+    [_draggedTile release];
     [super dealloc];
+}
+
+#pragma mark - Dragging gesture methods
+
+/*
+ Method to handle dragging from the pan gesture recognizer
+ Prosedure untuk mengatur penggeseran dari pan gesture recognizer
+*/
+- (void)dragging:(UIPanGestureRecognizer *)gestureRecognizer {    
+    CGPoint point;
+    switch (gestureRecognizer.state) {
+        // check if the selected tile can be moved
+        // cek bila petak yang dipilih bisa digerakkan
+        case UIGestureRecognizerStateBegan :
+            point = [gestureRecognizer locationInView:self];
+            _direction = [_board validMove:CGPointMake(floorf(point.x / _tileWidth) + 1, floorf(point.y / _tileHeight) + 1)];
+            
+            if (_direction != NONE) {
+                for (UIImageView *tile in _tiles) {
+                    if (CGRectContainsPoint(tile.frame, point)) {
+                        [_draggedTile release];
+                        _draggedTile = [tile retain];
+                        break;
+                    }
+                }
+            }
+            break;
+        // moving the selected tile 
+        // menggerakkan petak terpilih
+        case UIGestureRecognizerStateChanged :
+            if (_draggedTile != nil) {
+                CGPoint translation = [gestureRecognizer translationInView:self];
+                CGFloat x = 0.0, y = 0.0;
+                
+                switch (_direction) {
+                    case UP :
+                        if (translation.y > 0) y = 0.0;
+                        else if (translation.y < -_tileHeight) y = -_tileHeight;
+                        else y = translation.y;
+                        break;
+                    case RIGHT:
+                        if (translation.x < 0) x = 0.0;
+                        else if (translation.x > _tileWidth) x = _tileWidth;
+                        else x = translation.x;
+                        break;
+                    case DOWN :
+                        if (translation.y < 0) y = 0.0;
+                        else if (translation.y > _tileHeight) y = _tileHeight;
+                        else y = translation.y;
+                        break; 
+                    case LEFT:
+                        if (translation.x > 0) x = 0.0;
+                        else if (translation.x < -_tileWidth) x = -_tileWidth;
+                        else x = translation.x;
+                        break;
+                    default:
+                        return;
+                }
+                [_draggedTile setTransform:CGAffineTransformMakeTranslation(x, y)];
+            }
+            break;
+        // snap tile to position, update the board model
+        // tempatkan petak ke tempat yang sesuai, ubah kembali model board 
+        case UIGestureRecognizerStateEnded :
+            if (_draggedTile != nil) {
+                CGPoint movingTilePoint = CGPointMake(floorf(_draggedTile.center.x / _tileWidth) + 1, floorf(_draggedTile.center.y / _tileHeight) + 1);
+                
+                if (_draggedTile.transform.ty < 0) {
+                    if (_draggedTile.transform.ty < - (_tileHeight/2)) {
+                        [self moveTile:_draggedTile withDirection:UP fromTilePoint:movingTilePoint];
+                    } else {
+                        [self moveTile:_draggedTile withDirection:NONE fromTilePoint:movingTilePoint];
+                    }
+                } else if (_draggedTile.transform.tx > 0) {
+                    if (_draggedTile.transform.tx > (_tileWidth/2)) {
+                        [self moveTile:_draggedTile withDirection:RIGHT fromTilePoint:movingTilePoint];
+                    } else {
+                        [self moveTile:_draggedTile withDirection:NONE fromTilePoint:movingTilePoint];
+                    }
+                } else if (_draggedTile.transform.ty > 0) {
+                    if (_draggedTile.transform.ty > (_tileHeight/2)) {
+                        [self moveTile:_draggedTile withDirection:DOWN fromTilePoint:movingTilePoint];
+                    } else {
+                        [self moveTile:_draggedTile withDirection:NONE fromTilePoint:movingTilePoint];
+                    }
+                } else if (_draggedTile.transform.tx < 0) {
+                    if (_draggedTile.transform.tx < - (_tileWidth/2)) {
+                        [self moveTile:_draggedTile withDirection:LEFT fromTilePoint:movingTilePoint];
+                    } else {
+                        [self moveTile:_draggedTile withDirection:NONE fromTilePoint:movingTilePoint];
+                    }
+                }
+            }
+            break;
+        default:
+            break;
+    }    
+}
+
+/*
+ Method to handle tapping from the tap gesture recognizer
+ Prosedure untuk mengatur sentuhan dari tap gesture recognizer
+*/                            
+- (void)tapMove:(UITapGestureRecognizer *)tapRecognizer {
+    CGPoint tapPoint = [tapRecognizer locationInView:self];
+    int x = (tapPoint.x / _tileWidth) + 1;
+    int y = (tapPoint.y / _tileHeight) + 1;
+    
+    [self movingThisTile:CGPointMake(x, y)];
 }
 
 @end
