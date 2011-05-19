@@ -14,6 +14,7 @@
     UIImage *gambar;
     IAPuzzleBoardView *board;
     UIButton *startButton;
+    IBOutlet UISegmentedControl *boardSize;
     
     NSInteger step;
     AVAudioPlayer *clickSound;

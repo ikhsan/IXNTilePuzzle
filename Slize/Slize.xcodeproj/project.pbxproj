@@ -23,6 +23,8 @@
 		06BEB42613793B6A0074063A /* SlizeAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BEB42513793B6A0074063A /* SlizeAppDelegate.m */; };
 		06BEB42913793B6B0074063A /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06BEB42713793B6B0074063A /* MainWindow.xib */; };
 		06BEB43913793BB80074063A /* ff.png in Resources */ = {isa = PBXBuildFile; fileRef = 06BEB43813793BB80074063A /* ff.png */; };
+		06C5E7A913851C4600851A21 /* puzzle2.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C5E7A813851C4600851A21 /* puzzle2.png */; };
+		06C5E7AB13851DFD00851A21 /* Slize.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C5E7AA13851DFD00851A21 /* Slize.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		06BEB42513793B6A0074063A /* SlizeAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SlizeAppDelegate.m; sourceTree = "<group>"; };
 		06BEB42813793B6B0074063A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		06BEB43813793BB80074063A /* ff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ff.png; sourceTree = "<group>"; };
+		06C5E7A813851C4600851A21 /* puzzle2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = puzzle2.png; sourceTree = "<group>"; };
+		06C5E7AA13851DFD00851A21 /* Slize.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Slize.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +146,8 @@
 				06BEB42113793B6A0074063A /* Slize-Prefix.pch */,
 				06BEB42213793B6A0074063A /* main.m */,
 				06BEB43813793BB80074063A /* ff.png */,
+				06C5E7AA13851DFD00851A21 /* Slize.png */,
+				06C5E7A813851C4600851A21 /* puzzle2.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -202,6 +208,8 @@
 				06A8200D137AB65B007F40B1 /* PuzzleBoardViewController.xib in Resources */,
 				063A2FAD13813C3A0044C707 /* click.wav in Resources */,
 				063A2FAE13813C3A0044C707 /* slide.wav in Resources */,
+				06C5E7A913851C4600851A21 /* puzzle2.png in Resources */,
+				06C5E7AB13851DFD00851A21 /* Slize.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

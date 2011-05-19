@@ -17,6 +17,7 @@
     [startButton release];
     [clickSound release];
     [slideSound release];
+    [boardSize release];
     [super dealloc];
 }
 
@@ -30,7 +31,7 @@
     
     // set the image
     // tentukan gambar
-    UIImage *_gambar = [UIImage imageNamed:@"ff.png"];
+    UIImage *_gambar = [UIImage imageNamed:@"puzzle2.png"];
     gambar = [_gambar retain];
     
     // show the full image first in the view
@@ -54,6 +55,8 @@
 - (void)viewDidUnload {
     [self setBoard:nil];
     [self setStartButton:nil];
+    [boardSize release];
+    boardSize = nil;
     [super viewDidUnload];
 }
 
@@ -101,6 +104,7 @@
                                           completion:^(BOOL finished) {
                                               // set the view interaction and set the label text
                                               // atur status interaksi view dan teks dari label
+                                              NSLog(@"%d x %d puzzle is finished with %d steps", (boardSize.selectedSegmentIndex+3), (boardSize.selectedSegmentIndex+3), step);
                                               [board setUserInteractionEnabled:NO];
                                               [startButton setTitle:@"Start" forState:UIControlStateNormal];
                                           }];
@@ -118,6 +122,10 @@
  Untuk... memulai bermain puzzle lah.
 */
 - (IBAction)start:(id)sender {
+    // reset steps
+    // ulang jumlah langkah
+    step = 0;
+    
     // set the view so that it can interact with touches
     // atur view agar bisa interaksi dengan sentuhan
     [board setUserInteractionEnabled:YES];
@@ -128,7 +136,7 @@
     
     // initialize the board, lets play!
     // atur papan, mari bermain!
-    [board playWithImage:gambar andSize:BOARD_SIZE];
+    [board playWithImage:gambar andSize:(boardSize.selectedSegmentIndex+3)];
 }
 
 @end

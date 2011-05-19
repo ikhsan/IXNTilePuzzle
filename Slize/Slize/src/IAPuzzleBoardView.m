@@ -33,34 +33,7 @@
 */
 - (id)initWithImage:(UIImage *)image andSize:(NSInteger)size withFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    if (self) {        
-        /*IAPuzzleBoard *board = [[IAPuzzleBoard alloc] initWithSize:size];
-        self.board = board;
-        [board release];
-        
-        UIImage *resizedImage = [image resizedImageWithSize:frame.size];
-        _tileWidth = resizedImage.size.width/size;
-        _tileHeight = resizedImage.size.height/size;
-        
-        _tiles = [[NSMutableArray alloc] init];
-        for (int i = 0; i < _board.size; i++) {
-            for (int j = 0; j < _board.size; j++) {
-                if ((i == _board.size) && (j == _board.size)) {
-                    continue;
-                }
-                
-                CGRect frame = CGRectMake(_tileWidth*j, _tileHeight*i, _tileWidth, _tileHeight);
-                
-                CGImageRef tileImageRef = CGImageCreateWithImageInRect(resizedImage.CGImage, frame);
-                UIImage *tileImage = [UIImage imageWithCGImage:tileImageRef];
-                
-                UIImageView *tileImageView = [[UIImageView alloc] initWithImage:tileImage];
-                CGImageRelease(tileImageRef);
-                
-                [_tiles addObject:tileImageView];
-                [tileImageView release];
-            }
-        }*/
+    if (self) {
         [self playWithImage:image andSize:size];
     }    
     return self;
@@ -94,8 +67,8 @@
             UIImageView *tileImageView = [[UIImageView alloc] initWithImage:tileImage];
             CGImageRelease(tileImageRef);
             
-            [tileImageView.layer setShadowColor:[UIColor grayColor].CGColor];
-            [tileImageView.layer setShadowOpacity:0.7];
+            [tileImageView.layer setShadowColor:[UIColor blackColor].CGColor];
+            [tileImageView.layer setShadowOpacity:1.0];
             [tileImageView.layer setShadowRadius:1.0];
             [tileImageView.layer setShadowOffset:CGSizeMake(0.0, 0.0)];
             [tileImageView.layer setShadowPath:[[UIBezierPath bezierPathWithRect:tileImageView.layer.bounds] CGPath]];
@@ -230,8 +203,8 @@
                              [_board swapTileAtPoint:tilePoint withPoint:CGPointMake(tilePoint.x + deltaX, tilePoint.y + deltaY)];   
                              if (self.delegate) [self.delegate emptyTileMovedTo:tilePoint];
                              if ([_board isBoardFinished]) {
-                                 NSLog(@"board is finished");
-                                 
+                                 // board is finished
+                                 // papan telah selesai dimainkan
                                  if(self.delegate) {
                                      [self.delegate puzzleFinished];
                                  }
@@ -301,7 +274,7 @@
     [super dealloc];
 }
 
-#pragma mark - Dragging gesture methods
+#pragma mark - Dragging and tapping gesture methods
 
 /*
  Method to handle dragging from the pan gesture recognizer
