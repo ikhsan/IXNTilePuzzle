@@ -31,7 +31,7 @@
     
     // set the image
     // tentukan gambar
-    UIImage *_gambar = [UIImage imageNamed:@"puzzle2.png"];
+    UIImage *_gambar = [UIImage imageNamed:@"ff.png"];
     gambar = [_gambar retain];
     
     // show the full image first in the view

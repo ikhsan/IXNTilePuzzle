@@ -11,6 +11,7 @@
 
 @interface UIImage (Resize)
 
-- (UIImage*) resizedImageWithSize:(CGSize)size;
+- (UIImage*)resizedImageWithSize:(CGSize)size;
+- (UIImage*)cropImageFromFrame:(CGRect)frame;
 
 @end

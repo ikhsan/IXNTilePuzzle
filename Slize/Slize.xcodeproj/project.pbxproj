@@ -22,9 +22,13 @@
 		06BEB42313793B6A0074063A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BEB42213793B6A0074063A /* main.m */; };
 		06BEB42613793B6A0074063A /* SlizeAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BEB42513793B6A0074063A /* SlizeAppDelegate.m */; };
 		06BEB42913793B6B0074063A /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06BEB42713793B6B0074063A /* MainWindow.xib */; };
-		06BEB43913793BB80074063A /* ff.png in Resources */ = {isa = PBXBuildFile; fileRef = 06BEB43813793BB80074063A /* ff.png */; };
-		06C5E7A913851C4600851A21 /* puzzle2.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C5E7A813851C4600851A21 /* puzzle2.png */; };
 		06C5E7AB13851DFD00851A21 /* Slize.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C5E7AA13851DFD00851A21 /* Slize.png */; };
+		06DF12E9138680830052C3D9 /* board.png in Resources */ = {isa = PBXBuildFile; fileRef = 06DF12E5138680830052C3D9 /* board.png */; };
+		06DF12EA138680830052C3D9 /* board@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06DF12E6138680830052C3D9 /* board@2x.png */; };
+		06DF12EB138680830052C3D9 /* boardFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = 06DF12E7138680830052C3D9 /* boardFrame.png */; };
+		06DF12EC138680830052C3D9 /* boardFrame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06DF12E8138680830052C3D9 /* boardFrame@2x.png */; };
+		06DF12F0138682B20052C3D9 /* ff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06DF12EE138682B20052C3D9 /* ff@2x.png */; };
+		06DF12F1138682B20052C3D9 /* ff.png in Resources */ = {isa = PBXBuildFile; fileRef = 06DF12EF138682B20052C3D9 /* ff.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,9 +55,13 @@
 		06BEB42413793B6A0074063A /* SlizeAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlizeAppDelegate.h; sourceTree = "<group>"; };
 		06BEB42513793B6A0074063A /* SlizeAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SlizeAppDelegate.m; sourceTree = "<group>"; };
 		06BEB42813793B6B0074063A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		06BEB43813793BB80074063A /* ff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ff.png; sourceTree = "<group>"; };
-		06C5E7A813851C4600851A21 /* puzzle2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = puzzle2.png; sourceTree = "<group>"; };
 		06C5E7AA13851DFD00851A21 /* Slize.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Slize.png; sourceTree = "<group>"; };
+		06DF12E5138680830052C3D9 /* board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = board.png; sourceTree = "<group>"; };
+		06DF12E6138680830052C3D9 /* board@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "board@2x.png"; sourceTree = "<group>"; };
+		06DF12E7138680830052C3D9 /* boardFrame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boardFrame.png; sourceTree = "<group>"; };
+		06DF12E8138680830052C3D9 /* boardFrame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boardFrame@2x.png"; sourceTree = "<group>"; };
+		06DF12EE138682B20052C3D9 /* ff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ff@2x.png"; sourceTree = "<group>"; };
+		06DF12EF138682B20052C3D9 /* ff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ff.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,9 +153,13 @@
 				06BEB41E13793B6A0074063A /* InfoPlist.strings */,
 				06BEB42113793B6A0074063A /* Slize-Prefix.pch */,
 				06BEB42213793B6A0074063A /* main.m */,
-				06BEB43813793BB80074063A /* ff.png */,
 				06C5E7AA13851DFD00851A21 /* Slize.png */,
-				06C5E7A813851C4600851A21 /* puzzle2.png */,
+				06DF12E5138680830052C3D9 /* board.png */,
+				06DF12E6138680830052C3D9 /* board@2x.png */,
+				06DF12E7138680830052C3D9 /* boardFrame.png */,
+				06DF12E8138680830052C3D9 /* boardFrame@2x.png */,
+				06DF12EF138682B20052C3D9 /* ff.png */,
+				06DF12EE138682B20052C3D9 /* ff@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -204,12 +216,16 @@
 			files = (
 				06BEB42013793B6A0074063A /* InfoPlist.strings in Resources */,
 				06BEB42913793B6B0074063A /* MainWindow.xib in Resources */,
-				06BEB43913793BB80074063A /* ff.png in Resources */,
 				06A8200D137AB65B007F40B1 /* PuzzleBoardViewController.xib in Resources */,
 				063A2FAD13813C3A0044C707 /* click.wav in Resources */,
 				063A2FAE13813C3A0044C707 /* slide.wav in Resources */,
-				06C5E7A913851C4600851A21 /* puzzle2.png in Resources */,
 				06C5E7AB13851DFD00851A21 /* Slize.png in Resources */,
+				06DF12E9138680830052C3D9 /* board.png in Resources */,
+				06DF12EA138680830052C3D9 /* board@2x.png in Resources */,
+				06DF12EB138680830052C3D9 /* boardFrame.png in Resources */,
+				06DF12EC138680830052C3D9 /* boardFrame@2x.png in Resources */,
+				06DF12F0138682B20052C3D9 /* ff@2x.png in Resources */,
+				06DF12F1138682B20052C3D9 /* ff.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

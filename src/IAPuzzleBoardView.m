@@ -12,6 +12,7 @@
 #import "UIImage+Resize.h"
 
 @interface IAPuzzleBoardView (Private)
+- (void)orderingTile;
 - (void)moveTile:(UIImageView *)tile withDirection:(int)direction;
 - (void)movingThisTile:(CGPoint)tilePoint;
 - (void)drawPuzzle;
@@ -33,34 +34,7 @@
 */
 - (id)initWithImage:(UIImage *)image andSize:(NSInteger)size withFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    if (self) {        
-        /*IAPuzzleBoard *board = [[IAPuzzleBoard alloc] initWithSize:size];
-        self.board = board;
-        [board release];
-        
-        UIImage *resizedImage = [image resizedImageWithSize:frame.size];
-        _tileWidth = resizedImage.size.width/size;
-        _tileHeight = resizedImage.size.height/size;
-        
-        _tiles = [[NSMutableArray alloc] init];
-        for (int i = 0; i < _board.size; i++) {
-            for (int j = 0; j < _board.size; j++) {
-                if ((i == _board.size) && (j == _board.size)) {
-                    continue;
-                }
-                
-                CGRect frame = CGRectMake(_tileWidth*j, _tileHeight*i, _tileWidth, _tileHeight);
-                
-                CGImageRef tileImageRef = CGImageCreateWithImageInRect(resizedImage.CGImage, frame);
-                UIImage *tileImage = [UIImage imageWithCGImage:tileImageRef];
-                
-                UIImageView *tileImageView = [[UIImageView alloc] initWithImage:tileImage];
-                CGImageRelease(tileImageRef);
-                
-                [_tiles addObject:tileImageView];
-                [tileImageView release];
-            }
-        }*/
+    if (self) {
         [self playWithImage:image andSize:size];
     }    
     return self;
@@ -87,17 +61,13 @@
             }
             
             CGRect frame = CGRectMake(_tileWidth*j, _tileHeight*i, _tileWidth, _tileHeight);
-            
-            CGImageRef tileImageRef = CGImageCreateWithImageInRect(resizedImage.CGImage, frame);
-            UIImage *tileImage = [UIImage imageWithCGImage:tileImageRef];
-            
+            UIImage *tileImage = [resizedImage cropImageFromFrame:frame]; 
             UIImageView *tileImageView = [[UIImageView alloc] initWithImage:tileImage];
-            CGImageRelease(tileImageRef);
             
-            [tileImageView.layer setShadowColor:[UIColor grayColor].CGColor];
-            [tileImageView.layer setShadowOpacity:0.7];
-            [tileImageView.layer setShadowRadius:1.0];
-            [tileImageView.layer setShadowOffset:CGSizeMake(0.0, 0.0)];
+            [tileImageView.layer setShadowColor:[UIColor blackColor].CGColor];
+            [tileImageView.layer setShadowOpacity:0.65];
+            [tileImageView.layer setShadowRadius:1.5];
+            [tileImageView.layer setShadowOffset:CGSizeMake(1.5, 1.5)];
             [tileImageView.layer setShadowPath:[[UIBezierPath bezierPathWithRect:tileImageView.layer.bounds] CGPath]];
             
             [_tiles addObject:tileImageView];
@@ -122,6 +92,27 @@
 }
 
 /*
+ Method to make the right order of the tile so that the shadow looks real 
+ Prosedur untuk mengurut urutan petak agar bayangan terlihat nyata
+*/
+- (void)orderingTile {
+    //int order = 0;
+    for (int j = 1; j <= _board.size; j++) {
+        for (int i = 1; i <= _board.size; i++) {
+            NSNumber *value = [_board getTileAtPoint:CGPointMake(i, j)];
+            
+            if ([value intValue] == 0) {
+                continue;
+            }
+            
+            UIImageView *tileImageView = [_tiles objectAtIndex:[value intValue]-1];
+            
+            [self bringSubviewToFront:tileImageView];
+        }
+    }
+}
+
+/*
  Shuffle the board (SHUFFLE_TIMES) times, and then draw the puzzle board.
  Acak papan sebanyak SHUFFLE_TIMES kali, dan gambar papan puzzle.
 */
@@ -139,8 +130,8 @@
         [view removeFromSuperview];
     }
     
-    for (int i = 1; i <= _board.size; i++) {
-        for (int j = 1; j <= _board.size; j++) {
+    for (int j = 1; j <= _board.size; j++) {
+        for (int i = 1; i <= _board.size; i++) {
             NSNumber *value = [_board getTileAtPoint:CGPointMake(i, j)];
             
             if ([value intValue] == 0) {
@@ -185,11 +176,14 @@
                         options:UIViewAnimationCurveEaseOut 
                      animations:^{tile.frame = newFrame;} 
                      completion:^(BOOL finished){
-                         if ((finished) && [_board isBoardFinished]) {
-                             NSLog(@"board is finished");
-                             
-                             if(self.delegate) {
-                                 [self.delegate puzzleFinished];
+                         if (finished) {
+                             [self orderingTile];
+                             if ([_board isBoardFinished]) {
+                                 NSLog(@"board is finished");
+                                 
+                                 if(self.delegate) {
+                                     [self.delegate puzzleFinished];
+                                 }
                              }
                          }
                      }];    
@@ -229,6 +223,7 @@
                          if ((finished) && (direction != NONE)) {
                              [_board swapTileAtPoint:tilePoint withPoint:CGPointMake(tilePoint.x + deltaX, tilePoint.y + deltaY)];   
                              if (self.delegate) [self.delegate emptyTileMovedTo:tilePoint];
+                             [self orderingTile];
                              if ([_board isBoardFinished]) {
                                  NSLog(@"board is finished");
                                  
@@ -255,6 +250,7 @@
             break;
         }
     }
+    NSLog(@"idx : %d", [[self subviews] indexOfObject:tileView]);
     
     int move = [_board validMove:tilePoint];
     CGPoint neighborPoint;
@@ -325,6 +321,8 @@
                     }
                 }
             }
+            
+            NSLog(@"idx : %d", [[self subviews] indexOfObject:_draggedTile]);
             break;
         // moving the selected tile 
         // menggerakkan petak terpilih
