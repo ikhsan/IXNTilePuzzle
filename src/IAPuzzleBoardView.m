@@ -53,7 +53,7 @@
     _tileWidth = resizedImage.size.width/size;
     _tileHeight = resizedImage.size.height/size;
     
-    _tiles = [[NSMutableArray alloc] init];
+    self.tiles = [[[NSMutableArray alloc] init] autorelease];
     for (int i = 0; i < _board.size; i++) {
         for (int j = 0; j < _board.size; j++) {
             if ((i == _board.size) && (j == _board.size)) {
@@ -70,7 +70,7 @@
             [tileImageView.layer setShadowOffset:CGSizeMake(1.5, 1.5)];
             [tileImageView.layer setShadowPath:[[UIBezierPath bezierPathWithRect:tileImageView.layer.bounds] CGPath]];
             
-            [_tiles addObject:tileImageView];
+            [self.tiles addObject:tileImageView];
             [tileImageView release];
         }
     }
@@ -105,7 +105,7 @@
                 continue;
             }
             
-            UIImageView *tileImageView = [_tiles objectAtIndex:[value intValue]-1];
+            UIImageView *tileImageView = [self.tiles objectAtIndex:[value intValue]-1];
             
             [self bringSubviewToFront:tileImageView];
         }
@@ -138,7 +138,7 @@
                 continue;
             }
             
-            UIImageView *tileImageView = [_tiles objectAtIndex:[value intValue]-1];
+            UIImageView *tileImageView = [self.tiles objectAtIndex:[value intValue]-1];
             
             CGRect frame = CGRectMake(_tileWidth*(i-1), _tileHeight*(j-1), _tileWidth, _tileHeight);
             tileImageView.frame = frame;
@@ -244,7 +244,7 @@
     CGRect checkRect = CGRectMake((tilePoint.x-1)*_tileWidth + 1, 
                                   (tilePoint.y-1)*_tileHeight + 1, 
                                   1.0, 1.0);
-    for (UIImageView *enumTile in _tiles) {
+    for (UIImageView *enumTile in self.tiles) {
         if  (CGRectIntersectsRect(enumTile.frame, checkRect)) {
             tileView = enumTile;
             break;
@@ -313,7 +313,7 @@
             _direction = [_board validMove:CGPointMake(floorf(point.x / _tileWidth) + 1, floorf(point.y / _tileHeight) + 1)];
             
             if (_direction != NONE) {
-                for (UIImageView *tile in _tiles) {
+                for (UIImageView *tile in self.tiles) {
                     if (CGRectContainsPoint(tile.frame, point)) {
                         [_draggedTile release];
                         _draggedTile = [tile retain];
@@ -321,8 +321,6 @@
                     }
                 }
             }
-            
-            NSLog(@"idx : %d", [[self subviews] indexOfObject:_draggedTile]);
             break;
         // moving the selected tile 
         // menggerakkan petak terpilih

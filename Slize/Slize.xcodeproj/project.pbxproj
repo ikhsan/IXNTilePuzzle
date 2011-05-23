@@ -11,6 +11,8 @@
 		064B0EB8137BCD27007EDAB1 /* IAPuzzleBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 064B0EB4137BCD27007EDAB1 /* IAPuzzleBoard.m */; };
 		064B0EB9137BCD27007EDAB1 /* IAPuzzleBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 064B0EB6137BCD27007EDAB1 /* IAPuzzleBoardView.m */; };
 		064B0EC6137BCE8C007EDAB1 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 064B0EC5137BCE8C007EDAB1 /* UIImage+Resize.m */; };
+		064CFCBE138A7BB50053567B /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 064CFCBD138A7BB40053567B /* icon@2x.png */; };
+		064CFCC0138A7BBA0053567B /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 064CFCBF138A7BBA0053567B /* icon.png */; };
 		06A8200C137AB65B007F40B1 /* PuzzleBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A8200A137AB65B007F40B1 /* PuzzleBoardViewController.m */; };
 		06A8200D137AB65B007F40B1 /* PuzzleBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06A8200B137AB65B007F40B1 /* PuzzleBoardViewController.xib */; };
 		06BEB41613793B6A0074063A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06BEB41513793B6A0074063A /* UIKit.framework */; };
@@ -37,6 +39,8 @@
 		064B0EB6137BCD27007EDAB1 /* IAPuzzleBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPuzzleBoardView.m; sourceTree = "<group>"; };
 		064B0EC4137BCE8C007EDAB1 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
 		064B0EC5137BCE8C007EDAB1 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		064CFCBD138A7BB40053567B /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		064CFCBF138A7BBA0053567B /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		06A82009137AB65B007F40B1 /* PuzzleBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PuzzleBoardViewController.h; sourceTree = "<group>"; };
 		06A8200A137AB65B007F40B1 /* PuzzleBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PuzzleBoardViewController.m; sourceTree = "<group>"; };
 		06A8200B137AB65B007F40B1 /* PuzzleBoardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PuzzleBoardViewController.xib; sourceTree = "<group>"; };
@@ -100,6 +104,8 @@
 		06BEB40613793B6A0074063A = {
 			isa = PBXGroup;
 			children = (
+				064CFCBF138A7BBA0053567B /* icon.png */,
+				064CFCBD138A7BB40053567B /* icon@2x.png */,
 				06BEB41B13793B6A0074063A /* Slize */,
 				06BEB41413793B6A0074063A /* Frameworks */,
 				06BEB41213793B6A0074063A /* Products */,
@@ -218,6 +224,8 @@
 				06DF12EC138680830052C3D9 /* boardFrame@2x.png in Resources */,
 				06DF12F0138682B20052C3D9 /* ff@2x.png in Resources */,
 				06DF12F1138682B20052C3D9 /* ff.png in Resources */,
+				064CFCBE138A7BB50053567B /* icon@2x.png in Resources */,
+				064CFCC0138A7BBA0053567B /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
