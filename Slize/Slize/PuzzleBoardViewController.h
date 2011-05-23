@@ -17,8 +17,6 @@
     IBOutlet UISegmentedControl *boardSize;
     
     NSInteger step;
-    AVAudioPlayer *clickSound;
-    AVAudioPlayer *slideSound;
 }
 
 @property (nonatomic, retain) IBOutlet IAPuzzleBoardView *board;

@@ -15,8 +15,6 @@
 - (void)dealloc {
     [board release];
     [startButton release];
-    [clickSound release];
-    [slideSound release];
     [boardSize release];
     [super dealloc];
 }
@@ -40,16 +38,6 @@
     fullImage.frame = board.bounds;
     [board addSubview:fullImage];
     [fullImage release];
-    
-    // setting for sound effects
-    // pengaturan untuk efek suara
-    NSError *error = nil;
-    
-    NSString *pathToClick = [[NSBundle mainBundle] pathForResource:@"click" ofType:@"wav"];
-    clickSound = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:pathToClick] error:&error];
-    
-    NSString *pathToSlide = [[NSBundle mainBundle] pathForResource:@"slide" ofType:@"wav"];
-    slideSound = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:pathToSlide] error:&error];
 }
 
 - (void)viewDidUnload {
@@ -66,54 +54,40 @@
  Prosedur delegasi ini dipanggil bila papan tersebut telah selesai dimainkan
 */
 - (void)puzzleFinished {
-    // This method is fired every time the board is finished, you can make this method doing whatever you want. Mine, it does two simple animation :
-    // 1. Set the alpha of every tile in the board to 0.0, upon completion remove every tiles, add the full image with 0.0 alpha and then start the second animation
-    // 2. Set the alpha of the full image to 1.0, upon completion set the view so that it can't interact, and set the label to 'start'
+    // This method is fired every time the board is finished, you can make this method doing whatever you want. Mine, it does a simple animation :
+    // 1. Add the full image, set it's alpha with 0.0. Animate it to 1.0.
+    // 2. Upon completion set the view so that it can't interact, and set the label to 'start'
     //
     // Prosedur ini akan terpanggil ketika papan sudah selesai dimainkan. Anda bisa membuat prosedur ini melakukan apa saja. Punya saya, hanya melakukan dua animasi sederhana :
-    // 1. Atur alpha dari setiap petak menjadi 0.0 dengan animasi, selesai animasi, hapus setiap petak, tambahkan gambar penuh ke dalam papan dengan alpha 0.0 dan mulai animasi berikutnya
-    // 2. Atur alpha dari gambar menjadi 1.0, setelah animasi selesai atur view agar tidak bisa berinteraksi dan ubah label teks menjadi 'start' 
+    // 1. Tambahkan gambar asli, atur alphanya 0.0. Animasikan menjadi 1.0.
+    // 2. Setelah animasi selesai atur view agar tidak bisa berinteraksi dan ubah label teks menjadi 'start' 
+    
+    // add the full image with 0.0 alpha in view
+    // tambahkan gambar penuh dengan alpha 0.0 ke dalam view
+    UIImageView *fullImage = [[UIImageView alloc]initWithImage:gambar];
+    fullImage.frame = board.bounds;
+    fullImage.alpha = 0.0;
+    [board addSubview:fullImage];
+    
     [UIView animateWithDuration:.4 
                      animations:^{
-                         // set the alpha of every tile to 0.0
-                         // atur alpha tiap petak menjadi 0.0
-                         for (id view in board.subviews) {
-                             [view setAlpha:0.0];
-                         }                     
+                         // set the alpha of full image to 1.0
+                         // atur alpha gambar penuh tersebut menjadi 1.0
+                         fullImage.alpha = 1.0;                    
                      } 
                      completion:^(BOOL finished){
-                         // remove every tile from view
-                         // hapus semua petak dari view
-                         for (id view in board.subviews) {
-                             [view removeFromSuperview];
-                         }
-                         
-                         // add the full image with 0.0 alpha in view
-                         // tambahkan gambar penuh dengan alpha 0.0 ke dalam view
-                         UIImageView *fullImage = [[UIImageView alloc]initWithImage:gambar];
-                         fullImage.frame = board.bounds;
-                         fullImage.alpha = 0.0;
-                         [board addSubview:fullImage];
-                         
-                         [UIView animateWithDuration:.4
-                                          animations:^{
-                                              // set the alpha of full image to 1.0
-                                              // atur alpha gambar penuh tersebut menjadi 1.0
-                                              fullImage.alpha = 1.0;
-                                          } 
-                                          completion:^(BOOL finished) {
-                                              // set the view interaction and set the label text
-                                              // atur status interaksi view dan teks dari label
-                                              NSLog(@"%d x %d puzzle is finished with %d steps", (boardSize.selectedSegmentIndex+3), (boardSize.selectedSegmentIndex+3), step);
-                                              [board setUserInteractionEnabled:NO];
-                                              [startButton setTitle:@"Start" forState:UIControlStateNormal];
-                                          }];
+                         // set the view interaction and set the label text
+                         // atur status interaksi view dan teks dari label
+                         NSLog(@"Congrats! You finish this %d x %d puzzle with %d steps", (boardSize.selectedSegmentIndex+3), (boardSize.selectedSegmentIndex+3), step);
+                         [board setUserInteractionEnabled:NO];
+                         [startButton setTitle:@"Start" forState:UIControlStateNormal];
                      }];    
 }
 
 - (void)emptyTileMovedTo:(CGPoint)tilePoint {
+    // You can add some cool sound effects here
+    // Anda bisa tambahkan efek suara yang keren di sini
     step += 1;
-    [slideSound play];
 }
 
 #pragma mark - IB Actions
