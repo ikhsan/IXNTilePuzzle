@@ -29,7 +29,7 @@
 
 @property CGFloat tileWidth;
 @property CGFloat tileHeight;
-@property (nonatomic, retain) IBOutlet id <IAPuzzleBoardDelegate> delegate;
+@property (nonatomic, assign) IBOutlet id <IAPuzzleBoardDelegate> delegate;
 @property (nonatomic, retain) IAPuzzleBoard *board;
 @property (nonatomic, retain) NSMutableArray *tiles;
 
