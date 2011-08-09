@@ -58,11 +58,11 @@
  This delegate method is fired when the puzzle board is finished
  Prosedur delegasi ini dipanggil bila papan tersebut telah selesai dimainkan
 */
-- (void)puzzleFinished;
+- (void)puzzleBoardDidFinished:(IAPuzzleBoardView *)board;
 
 /*
  This delegate method is fired when a tile is moved
  Prosedur delegasi ini dipanggil bila ada petak yang berhasil digerakkan
 */
-- (void)emptyTileMovedTo:(CGPoint)tilePoint;
+- (void)puzzleBoard:(IAPuzzleBoardView *)board emptyTileDidMovedTo:(CGPoint)tilePoint;
 @end

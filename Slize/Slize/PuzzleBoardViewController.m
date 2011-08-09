@@ -53,7 +53,7 @@
  This delegate method is fired when the puzzle board is finished
  Prosedur delegasi ini dipanggil bila papan tersebut telah selesai dimainkan
 */
-- (void)puzzleFinished {
+- (void)puzzleBoardDidFinished:(IAPuzzleBoardView *)puzzleBoard {
     // This method is fired every time the board is finished, you can make this method doing whatever you want. Mine, it does a simple animation :
     // 1. Add the full image, set it's alpha with 0.0. Animate it to 1.0.
     // 2. Upon completion set the view so that it can't interact, and set the label to 'start'
@@ -84,7 +84,7 @@
                      }];    
 }
 
-- (void)emptyTileMovedTo:(CGPoint)tilePoint {
+- (void)puzzleBoard:(IAPuzzleBoardView *)board emptyTileDidMovedTo:(CGPoint)tilePoint {
     // You can add some cool sound effects here
     // Anda bisa tambahkan efek suara yang keren di sini
     step += 1;

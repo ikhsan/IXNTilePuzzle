@@ -182,7 +182,7 @@
                                  NSLog(@"board is finished");
                                  
                                  if(self.delegate) {
-                                     [self.delegate puzzleFinished];
+                                     [self.delegate puzzleBoardDidFinished:self];
                                  }
                              }
                          }
@@ -222,13 +222,13 @@
                          
                          if ((finished) && (direction != NONE)) {
                              [_board swapTileAtPoint:tilePoint withPoint:CGPointMake(tilePoint.x + deltaX, tilePoint.y + deltaY)];   
-                             if (self.delegate) [self.delegate emptyTileMovedTo:tilePoint];
+                             if (self.delegate) [self.delegate puzzleBoard:self emptyTileDidMovedTo:tilePoint];
                              [self orderingTile];
                              if ([_board isBoardFinished]) {
                                  NSLog(@"board is finished");
                                  
                                  if(self.delegate) {
-                                     [self.delegate puzzleFinished];
+                                     [self.delegate puzzleBoardDidFinished:self];
                                  }
                              }                             
                          }
@@ -259,25 +259,25 @@
             neighborPoint = CGPointMake(tilePoint.x, tilePoint.y-1);
             [_board swapTileAtPoint:tilePoint withPoint:neighborPoint];
             [self moveTile:tileView withDirection:UP];
-            if (self.delegate) [self.delegate emptyTileMovedTo:tilePoint];
+            if (self.delegate) [self.delegate puzzleBoard:self emptyTileDidMovedTo:tilePoint];
             break;
         case RIGHT:
             neighborPoint = CGPointMake(tilePoint.x+1, tilePoint.y);
             [_board swapTileAtPoint:tilePoint withPoint:neighborPoint];
             [self moveTile:tileView withDirection:RIGHT];
-            if (self.delegate) [self.delegate emptyTileMovedTo:tilePoint];
+            if (self.delegate) [self.delegate puzzleBoard:self emptyTileDidMovedTo:tilePoint];
             break;
         case DOWN:
             neighborPoint = CGPointMake(tilePoint.x, tilePoint.y+1);
             [_board swapTileAtPoint:tilePoint withPoint:neighborPoint];
             [self moveTile:tileView withDirection:DOWN];
-            if (self.delegate) [self.delegate emptyTileMovedTo:tilePoint];
+            if (self.delegate) [self.delegate puzzleBoard:self emptyTileDidMovedTo:tilePoint];
             break;
         case LEFT:
             neighborPoint = CGPointMake(tilePoint.x-1, tilePoint.y);
             [_board swapTileAtPoint:tilePoint withPoint:neighborPoint];
             [self moveTile:tileView withDirection:LEFT];
-            if (self.delegate) [self.delegate emptyTileMovedTo:tilePoint];
+            if (self.delegate) [self.delegate puzzleBoard:self emptyTileDidMovedTo:tilePoint];
             break;
         default:
             NSLog(@"the tile can't be moved");
