@@ -110,7 +110,7 @@ const NSInteger TileMaxSize = 6;
     else if ([[self tileAtCoordinate:leftNeighbor] isEqualToNumber:@0])
         neighbor = leftNeighbor;
     
-    if (YES)
+    if (move)
     {
         NSNumber *number = [self tileAtCoordinate:coor];
         [self setTileAtCoordinate:coor with:[self tileAtCoordinate:neighbor]];

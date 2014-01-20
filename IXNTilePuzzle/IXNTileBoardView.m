@@ -190,6 +190,7 @@ typedef enum {
 - (void)tileWasMoved
 {
     [self orderingTiles];
+    
     if ([self.board isAllTilesCorrect])
         if (self.delegate) [self.delegate tileBoardViewDidFinished:self];
 }
@@ -203,7 +204,7 @@ typedef enum {
 
 - (void)dragging:(UIPanGestureRecognizer *)gestureRecognizer
 {
-    return;
+
     switch (gestureRecognizer.state)
     {
         case UIGestureRecognizerStateBegan: {
@@ -233,23 +234,22 @@ typedef enum {
 
 - (void)assignDraggedTileAtPoint:(CGPoint)position
 {
-    CGPoint coordinate = [self coordinateFromPoint:position];
+    CGPoint coor = [self coordinateFromPoint:position];
     
-    if (![self.board canMoveTile:coordinate]) {
+    if (![self.board canMoveTile:coor]) {
         self.draggedDirection = 0;
         self.draggedTile = nil;
         return;
     }
     
-    CGPoint coor = [self.board shouldMove:NO tileAtCoordinate:coordinate];
     if ([[self.board tileAtCoordinate:CGPointMake(coor.x, coor.y-1)] isEqualToNumber:@0]) {
-        self.draggedDirection = DirectionDown;
-    } else if ([[self.board tileAtCoordinate:CGPointMake(coor.x+1, coor.y)] isEqualToNumber:@0]) {
-        self.draggedDirection = DirectionLeft;
-    } else if ([[self.board tileAtCoordinate:CGPointMake(coor.x, coor.y+1)] isEqualToNumber:@0]) {
         self.draggedDirection = DirectionUp;
-    } else if ([[self.board tileAtCoordinate:CGPointMake(coor.x-1, coor.y)] isEqualToNumber:@0]) {
+    } else if ([[self.board tileAtCoordinate:CGPointMake(coor.x+1, coor.y)] isEqualToNumber:@0]) {
         self.draggedDirection = DirectionRight;
+    } else if ([[self.board tileAtCoordinate:CGPointMake(coor.x, coor.y+1)] isEqualToNumber:@0]) {
+        self.draggedDirection = DirectionDown;
+    } else if ([[self.board tileAtCoordinate:CGPointMake(coor.x-1, coor.y)] isEqualToNumber:@0]) {
+        self.draggedDirection = DirectionLeft;
     }
     
     for (UIImageView *tile in self.tiles)
@@ -294,38 +294,72 @@ typedef enum {
     [self.draggedTile setTransform:CGAffineTransformMakeTranslation(x, y)];
 }
 
+- (void)moveTile:(UIImageView *)tile withDirection:(int)direction fromTilePoint:(CGPoint)tilePoint {
+    int deltaX = 0;
+    int deltaY = 0;
+    
+    switch (direction) {
+        case DirectionUp :
+            deltaY = -1; break;
+        case DirectionRight :
+            deltaX = 1; break;
+        case DirectionDown :
+            deltaY = 1; break;
+        case DirectionLeft :
+            deltaX = -1; break;
+        default: break;
+    }
+    CGRect newFrame = CGRectMake((tilePoint.x + deltaX - 1) * self.tileWidth, (tilePoint.y + deltaY - 1) * self.tileHeight, tile.frame.size.width, tile.frame.size.height);
+    
+    [UIView animateWithDuration:.1
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         tile.frame = newFrame;
+                     }
+                     completion:^(BOOL finished){
+                         [tile setTransform:CGAffineTransformIdentity];
+                         tile.frame = newFrame;
+                         
+                         if (direction != 0) {
+                             [self.board shouldMove:YES tileAtCoordinate:tilePoint];
+                             if (self.delegate) [self.delegate tileBoardView:self tileDidMove:tilePoint];
+                             [self tileWasMoved];
+                         }
+                     }];
+}
+
+
 - (void)snapDraggedTile
 {
     
     CGPoint movingTilePoint = CGPointMake(floorf(self.draggedTile.center.x / self.tileWidth) + 1, floorf(self.draggedTile.center.y / self.tileHeight) + 1);
     
-//    if (self.draggedTile.transform.ty < 0) {
-//        if (self.draggedTile.transform.ty < - (self.tileHeight/2)) {
-//            [self moveTile:_draggedTile withDirection:DirectionUp fromTilePoint:movingTilePoint];
-//        } else {
-//            [self moveTile:_draggedTile withDirection:NONE fromTilePoint:movingTilePoint];
-//        }
-//    } else if (self.draggedTile.transform.tx > 0) {
-//        if (self.draggedTile.transform.tx > (self.tileWidth/2)) {
-//            [self moveTile:_draggedTile withDirection:RIGHT fromTilePoint:movingTilePoint];
-//        } else {
-//            [self moveTile:_draggedTile withDirection:NONE fromTilePoint:movingTilePoint];
-//        }
-//    } else if (self.draggedTile.transform.ty > 0) {
-//        if (self.draggedTile.transform.ty > (self.tileHeight/2)) {
-//            [self moveTile:_draggedTile withDirection:DOWN fromTilePoint:movingTilePoint];
-//        } else {
-//            [self moveTile:_draggedTile withDirection:NONE fromTilePoint:movingTilePoint];
-//        }
-//    } else if (self.draggedTile.transform.tx < 0) {
-//        if (self.draggedTile.transform.tx < - (self.tileWidth/2)) {
-//            [self moveTile:_draggedTile withDirection:LEFT fromTilePoint:movingTilePoint];
-//        } else {
-//            [self moveTile:_draggedTile withDirection:NONE fromTilePoint:movingTilePoint];
-//        }
-//    }
-    
-    
+    if (self.draggedTile.transform.ty < 0) {
+        if (self.draggedTile.transform.ty < - (self.tileHeight/2)) {
+            [self moveTile:self.draggedTile withDirection:DirectionUp fromTilePoint:movingTilePoint];
+        } else {
+            [self moveTile:self.draggedTile withDirection:0 fromTilePoint:movingTilePoint];
+        }
+    } else if (self.draggedTile.transform.tx > 0) {
+        if (self.draggedTile.transform.tx > (self.tileWidth/2)) {
+            [self moveTile:self.draggedTile withDirection:DirectionRight fromTilePoint:movingTilePoint];
+        } else {
+            [self moveTile:self.draggedTile withDirection:0 fromTilePoint:movingTilePoint];
+        }
+    } else if (self.draggedTile.transform.ty > 0) {
+        if (self.draggedTile.transform.ty > (self.tileHeight/2)) {
+            [self moveTile:self.draggedTile withDirection:DirectionDown fromTilePoint:movingTilePoint];
+        } else {
+            [self moveTile:self.draggedTile withDirection:0 fromTilePoint:movingTilePoint];
+        }
+    } else if (self.draggedTile.transform.tx < 0) {
+        if (self.draggedTile.transform.tx < - (self.tileWidth/2)) {
+            [self moveTile:self.draggedTile withDirection:DirectionLeft fromTilePoint:movingTilePoint];
+        } else {
+            [self moveTile:self.draggedTile withDirection:0 fromTilePoint:movingTilePoint];
+        }
+    }
 }
 
 - (void)tapMove:(UITapGestureRecognizer *)tapRecognizer
