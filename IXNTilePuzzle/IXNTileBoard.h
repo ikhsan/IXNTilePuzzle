@@ -17,8 +17,9 @@
 - (NSNumber *)tileAtCoordinate:(CGPoint)coor;
 
 - (BOOL)canMoveTile:(CGPoint)coor;
-- (void)moveTileAtCoordinate:(CGPoint)coor;
-- (void)shuffle:(NSInteger)times;
+- (CGPoint)shouldMove:(BOOL)move tileAtCoordinate:(CGPoint)coor;
 - (BOOL)isAllTilesCorrect;
+
+- (void)shuffle:(NSInteger)times;
 
 @end

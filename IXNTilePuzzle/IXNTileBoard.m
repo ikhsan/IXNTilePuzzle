@@ -91,9 +91,9 @@ const NSInteger TileMaxSize = 6;
              [[self tileAtCoordinate:CGPointMake(coor.x-1, coor.y)] isEqualToNumber:@0] ); // left neighbor
 }
 
-- (void)moveTileAtCoordinate:(CGPoint)coor
+- (CGPoint)shouldMove:(BOOL)move tileAtCoordinate:(CGPoint)coor
 {
-    if (![self canMoveTile:coor]) return;
+    if (![self canMoveTile:coor]) return CGPointZero;
     
     CGPoint lowerNeighbor = CGPointMake(coor.x, coor.y+1);
     CGPoint rightNeighbor = CGPointMake(coor.x+1, coor.y);
@@ -110,9 +110,14 @@ const NSInteger TileMaxSize = 6;
     else if ([[self tileAtCoordinate:leftNeighbor] isEqualToNumber:@0])
         neighbor = leftNeighbor;
     
-    NSNumber *number = [self tileAtCoordinate:coor];
-    [self setTileAtCoordinate:coor with:[self tileAtCoordinate:neighbor]];
-    [self setTileAtCoordinate:neighbor with:number];
+    if (YES)
+    {
+        NSNumber *number = [self tileAtCoordinate:coor];
+        [self setTileAtCoordinate:coor with:[self tileAtCoordinate:neighbor]];
+        [self setTileAtCoordinate:neighbor with:number];        
+    }
+    
+    return neighbor;
 }
 
 - (void)shuffle:(NSInteger)times
@@ -132,7 +137,7 @@ const NSInteger TileMaxSize = 6;
         
         NSValue *v = validMoves[arc4random_uniform([validMoves count])];
         CGPoint p = [v CGPointValue];
-        [self moveTileAtCoordinate:p];
+        [self shouldMove:YES tileAtCoordinate:p];
     }
 }
 

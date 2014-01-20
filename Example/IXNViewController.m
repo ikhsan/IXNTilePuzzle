@@ -7,8 +7,9 @@
 //
 
 #import "IXNViewController.h"
+#import "IXNTileBoardView.h"
 
-@interface IXNViewController ()
+@interface IXNViewController () <IXNTileBoardViewDelegate>
 
 @end
 
@@ -18,12 +19,27 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    [self.board playWithImage:[UIImage imageNamed:@"pug.jpg"] size:4];
+    [self.board shuffleTimes:20];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Tile Board Delegate Method
+
+- (void)tileBoardView:(IXNTileBoardView *)tileBoardView tileDidMove:(CGPoint)position
+{
+    
+}
+
+- (void)tileBoardViewDidFinished:(IXNTileBoardView *)tileBoardView
+{
+    
 }
 
 @end

@@ -128,14 +128,14 @@
 - (void)testTileShouldMoveUpward
 {
     self.board.size = 3;
-    [self.board moveTileAtCoordinate:CGPointMake(3, 2)];
+    [self.board shouldMove:YES tileAtCoordinate:CGPointMake(3, 2)];
     XCTAssertTrue([self.board canMoveTile:CGPointMake(3, 3)], @"Tile should able to be moved upward");
 }
 
 - (void)testTileShouldMoveToLeft
 {
     self.board.size = 3;
-    [self.board moveTileAtCoordinate:CGPointMake(2, 3)];
+    [self.board shouldMove:YES tileAtCoordinate:CGPointMake(2, 3)];
     XCTAssertTrue([self.board canMoveTile:CGPointMake(3, 3)], @"Tile should able to be moved to left");
 }
 
@@ -145,7 +145,7 @@
     
     CGPoint p = CGPointMake(1, 1);
     NSNumber *value = [self.board tileAtCoordinate:p];
-    [self.board moveTileAtCoordinate:p];
+    [self.board shouldMove:YES tileAtCoordinate:p];
     XCTAssertEqual([self numberAtX:1 Y:1], [value integerValue], @"Tile should not move");
 }
 
@@ -153,32 +153,32 @@
 {
     self.board.size = 3;
     
-    [self.board moveTileAtCoordinate:CGPointMake(3, 2)];
+    [self.board shouldMove:YES tileAtCoordinate:CGPointMake(3, 2)];
     XCTAssertEqual([self numberAtX:3 Y:2], 0, @"Tile should moved downward");
 }
 
 - (void)testMoveTileToRight
 {
     self.board.size = 3;
-    [self.board moveTileAtCoordinate:CGPointMake(2, 3)];
+    [self.board shouldMove:YES tileAtCoordinate:CGPointMake(2, 3)];
     XCTAssertEqual([self numberAtX:2 Y:3], 0, @"Tile should moved right");
 }
 
 - (void)testMoveTileUpward
 {
     self.board.size = 4;
-    [self.board moveTileAtCoordinate:CGPointMake(4, 3)];
+    [self.board shouldMove:YES tileAtCoordinate:CGPointMake(4, 3)];
     XCTAssertEqual([self numberAtX:4 Y:3], 0, @"Tile should moved downward");
-    [self.board moveTileAtCoordinate:CGPointMake(4, 4)];
+    [self.board shouldMove:YES tileAtCoordinate:CGPointMake(4, 4)];
     XCTAssertEqual([self numberAtX:4 Y:4], 0, @"Tile should moved upward");
 }
 
 - (void)testMoveTileToLeft
 {
     self.board.size = 5;
-    [self.board moveTileAtCoordinate:CGPointMake(4, 5)];
+    [self.board shouldMove:YES tileAtCoordinate:CGPointMake(4, 5)];
     XCTAssertEqual([self numberAtX:4 Y:5], 0, @"Tile should moved to right");
-    [self.board moveTileAtCoordinate:CGPointMake(5, 5)];
+    [self.board shouldMove:YES tileAtCoordinate:CGPointMake(5, 5)];
     XCTAssertEqual([self numberAtX:5 Y:5], 0, @"Tile should moved to left");
 }
 
@@ -186,7 +186,7 @@
 {
     self.board.size = 6;
     XCTAssertTrue([self.board isAllTilesCorrect], @"Board should have all of its tiles in the right place");
-    [self.board moveTileAtCoordinate:CGPointMake(5, 6)];
+    [self.board shouldMove:YES tileAtCoordinate:CGPointMake(5, 6)];
     XCTAssertFalse([self.board isAllTilesCorrect], @"Board should have one incorrect tile");
 }
 

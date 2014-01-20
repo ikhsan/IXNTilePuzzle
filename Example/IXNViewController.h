@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class IXNTileBoardView;
+
 @interface IXNViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet IXNTileBoardView *board;
 
 @end
