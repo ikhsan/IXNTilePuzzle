@@ -15,7 +15,7 @@
 		4686476A188076FF00D41DA5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4686474C188076FF00D41DA5 /* UIKit.framework */; };
 		469AABF8188CB23500C5A6A9 /* IXNTileBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 469AABF7188CB23400C5A6A9 /* IXNTileBoardView.m */; };
 		469AABFB188CB41600C5A6A9 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 469AABFA188CB41600C5A6A9 /* UIImage+Resize.m */; };
-		469AABFD188CC3D600C5A6A9 /* pug.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 469AABFC188CC3D600C5A6A9 /* pug.jpg */; };
+		469AABFF188CDCF300C5A6A9 /* pug.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 469AABFE188CDCF300C5A6A9 /* pug.jpg */; };
 		46FE17ED188077F9006A8961 /* IXNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FE17EA188077F9006A8961 /* IXNAppDelegate.m */; };
 		46FE17EE188077F9006A8961 /* IXNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FE17EC188077F9006A8961 /* IXNViewController.m */; };
 		46FE17F218807814006A8961 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46FE17F018807814006A8961 /* Main.storyboard */; };
@@ -48,7 +48,7 @@
 		469AABF7188CB23400C5A6A9 /* IXNTileBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IXNTileBoardView.m; sourceTree = "<group>"; };
 		469AABF9188CB41600C5A6A9 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
 		469AABFA188CB41600C5A6A9 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
-		469AABFC188CC3D600C5A6A9 /* pug.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pug.jpg; sourceTree = "<group>"; };
+		469AABFE188CDCF300C5A6A9 /* pug.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = pug.jpg; path = Example/pug.jpg; sourceTree = SOURCE_ROOT; };
 		46FE17E9188077F9006A8961 /* IXNAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IXNAppDelegate.h; path = Example/IXNAppDelegate.h; sourceTree = SOURCE_ROOT; };
 		46FE17EA188077F9006A8961 /* IXNAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IXNAppDelegate.m; path = Example/IXNAppDelegate.m; sourceTree = SOURCE_ROOT; };
 		46FE17EB188077F9006A8961 /* IXNViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IXNViewController.h; path = Example/IXNViewController.h; sourceTree = SOURCE_ROOT; };
@@ -139,7 +139,7 @@
 		4686474F188076FF00D41DA5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				469AABFC188CC3D600C5A6A9 /* pug.jpg */,
+				469AABFE188CDCF300C5A6A9 /* pug.jpg */,
 				46FE17F518807855006A8961 /* IXNTilePuzzle-Info.plist */,
 				46FE17FC18807870006A8961 /* InfoPlist.strings */,
 				46FE17F718807855006A8961 /* main.m */,
@@ -257,9 +257,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				46FE17F418807830006A8961 /* Images.xcassets in Resources */,
+				469AABFF188CDCF300C5A6A9 /* pug.jpg in Resources */,
 				46FE17FE18807870006A8961 /* InfoPlist.strings in Resources */,
 				46FE17F218807814006A8961 /* Main.storyboard in Resources */,
-				469AABFD188CC3D600C5A6A9 /* pug.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
