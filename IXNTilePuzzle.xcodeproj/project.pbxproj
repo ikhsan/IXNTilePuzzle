@@ -38,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		460D37B0188DE16B00561326 /* IXNTilePuzzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IXNTilePuzzle.h; sourceTree = "<group>"; };
 		46864745188076FF00D41DA5 /* IXNTilePuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IXNTilePuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46864748188076FF00D41DA5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4686474A188076FF00D41DA5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -169,6 +170,7 @@
 		46FE180F18807BD1006A8961 /* IXNTilePuzzle */ = {
 			isa = PBXGroup;
 			children = (
+				460D37B0188DE16B00561326 /* IXNTilePuzzle.h */,
 				469AABF9188CB41600C5A6A9 /* UIImage+Resize.h */,
 				469AABFA188CB41600C5A6A9 /* UIImage+Resize.m */,
 				46FE181D18807C11006A8961 /* IXNTileBoard.h */,

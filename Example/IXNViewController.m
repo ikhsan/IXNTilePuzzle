@@ -7,7 +7,7 @@
 //
 
 #import "IXNViewController.h"
-#import "IXNTileBoardView.h"
+#import "IXNTilePuzzle.h"
 
 @interface IXNViewController () <IXNTileBoardViewDelegate>
 
@@ -21,7 +21,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     [self.board playWithImage:[UIImage imageNamed:@"pug.jpg"] size:4];
-    [self.board shuffleTimes:20];
+    [self.board shuffleTimes:100];
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,12 +34,12 @@
 
 - (void)tileBoardView:(IXNTileBoardView *)tileBoardView tileDidMove:(CGPoint)position
 {
-    
+    NSLog(@"tile move : %@", [NSValue valueWithCGPoint:position]);
 }
 
 - (void)tileBoardViewDidFinished:(IXNTileBoardView *)tileBoardView
 {
-    
+    NSLog(@"tile is completed");
 }
 
 @end
