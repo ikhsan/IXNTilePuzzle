@@ -1,22 +1,36 @@
-IASlidingPuzzleBoard
+IXNTilePuzzle
 ====================
 
-### English :
 A simple square uiview for making a simple sliding puzzle. I made this as a learning resource, to every beginner iOS developers, including myself. There are parts that i adopt from SliderPuzzleDemo by Joshua Newnham. If there's any advices, or improvements, please don't hesitate to improve it.
 
-_HOW TO USE :_
+*Update 2014*
+I rewrote the class to practice TDD for making the tile board model. I've updated the code to support iOS 7.
 
-- Drag IAPuzzleBoard (model) and IAPuzzleBoardView (view) to your iOS project.
-- Make a UIViewController that contains the IAPuzzleBoardView (via code or IB).
-- Don't forget to set it's delegate and implement its method.
-- For more explanation, you can check the Slize code, it's well commented.
+##Usage
 
-### Bahasa :
-UIView persegi sederhana untuk membuat permainan puzzle geser. Saya membuat ini sebagai materi belajar, untuk semua iOS developers pemula, termasuk saya sendiri. Ada beberapa bagian yang saya sadur dari SliderPuzzleDemo by Joshua Newnham. Bila ada saran atau perkembangan, jangan ragu-ragu untuk melakukannya.
+Please download the repository and check the sample code for usage.
 
-_CARA PENGGUNAAN :_
 
-- Tarik IAPuzzleBoard (model) dan IAPuzzleBoardView (view) ke dalam projek iOS Anda.
-- Buat UIViewController, bikin IAPuzzleBoardView di dalamnya
-- Jangan lupa set delegate-nya dan implementasikan method-nya.
-- Untuk penjelasan lebih lanjut, anda bisa cek kode contoh Slize, karena sudah dikomentar2in
+##License
+
+IXNTilePuzzle is available under the MIT License.
+
+Copyright (c) 2014 Ikhsan Assaat
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
