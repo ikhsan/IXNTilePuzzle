@@ -1,10 +1,9 @@
 IXNTilePuzzle
 ====================
 
-A simple square uiview for making a simple sliding puzzle. I made this as a learning resource, to every beginner iOS developers, including myself. There are parts that i adopt from SliderPuzzleDemo by Joshua Newnham. If there's any advices, or improvements, please don't hesitate to improve it.
+A simple square `UIView` for making a simple sliding puzzle. I made this as a learning process, which maybe will help others as well. There are parts that I adopt from SliderPuzzleDemo by Joshua Newnham. If there's any advices or improvements, please do make a pull request!
 
-*Update 2014*
-I rewrote the class to practice TDD for making the tile board model. I've updated the code to support iOS 7.
+*Update 2014:* I rewrote the class to practice TDD for making the tile board model. I've updated the code to support iOS 7.
 
 ##Usage
 
@@ -12,7 +11,8 @@ Please download the repository and check the sample code for usage.
 
 ##Icon Attribution
 
-Refresh by Garrett Knoll from The Noun Project
+- 'Refresh' by Garrett Knoll from The Noun Project
+- 'Puzzle' by Sam Smith from The Noun Project
 
 ##License
 
