@@ -8,8 +8,8 @@
 
 #import "IXNTileBoard.h"
 
-const NSInteger TileMinSize = 3;
-const NSInteger TileMaxSize = 6;
+static const NSInteger TileMinSize = 3;
+static const NSInteger TileMaxSize = 6;
 
 @interface IXNTileBoard ()
 

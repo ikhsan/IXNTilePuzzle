@@ -10,6 +10,9 @@ I rewrote the class to practice TDD for making the tile board model. I've update
 
 Please download the repository and check the sample code for usage.
 
+##Icon Attribution
+
+Refresh by Garrett Knoll from The Noun Project
 
 ##License
 

@@ -13,11 +13,11 @@
                         <viewControllerLayoutGuide type="bottom" id="nBN-gg-8GI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="El1-bF-yPA" customClass="IXNTileBoardView">
-                                <rect key="frame" x="10" y="134" width="300" height="300"/>
+                                <rect key="frame" x="10" y="90" width="300" height="300"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.9213169642857143" green="0.9213169642857143" blue="0.9213169642857143" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -28,24 +28,86 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="WAG-7n-TlN"/>
                                 </connections>
                             </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="STEPS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mwb-gb-jY1">
+                                <rect key="frame" x="134" y="30" width="58" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="19"/>
+                                <color key="textColor" red="0.25363088523464233" green="0.51040692359519646" blue="0.64672353316326525" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4a-rl-Rp7">
+                                <rect key="frame" x="145" y="51" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="25"/>
+                                <color key="textColor" red="0.25363088519999999" green="0.51040692359999995" blue="0.64672353319999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="D2W-sM-qQ9">
+                                <rect key="frame" x="83" y="422" width="155" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="155" id="4au-Hl-4md"/>
+                                    <constraint firstAttribute="height" constant="28" id="d2N-TU-TFL"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="3 x 3"/>
+                                    <segment title="4 x 4"/>
+                                    <segment title="5 x 5"/>
+                                </segments>
+                                <connections>
+                                    <action selector="sizeChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="lxg-A0-vW2"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vjT-IG-A98">
+                                <rect key="frame" x="20" y="35" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="pug.jpg">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonTouchDown:" destination="vXZ-lx-hvc" eventType="touchDown" id="uJ0-eV-ScY"/>
+                                    <action selector="buttonTouchUpInside:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="0cY-UW-M4O"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ICH-e5-mw4">
+                                <rect key="frame" x="260" y="34" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" backgroundImage="restart">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="restart:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Ake-Fg-Peb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="El1-bF-yPA" secondAttribute="centerX" id="Myi-cn-pxv"/>
                             <constraint firstAttribute="centerY" secondItem="El1-bF-yPA" secondAttribute="centerY" id="Xav-yk-Q0D"/>
+                            <constraint firstItem="nBN-gg-8GI" firstAttribute="top" secondItem="D2W-sM-qQ9" secondAttribute="bottom" constant="30" id="fmd-sF-bXw"/>
+                            <constraint firstAttribute="centerX" secondItem="D2W-sM-qQ9" secondAttribute="centerX" constant="-0.5" id="ofF-e0-BTV"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="board" destination="El1-bF-yPA" id="mXe-ab-dbX"/>
+                        <outlet property="sizeSegmentedControl" destination="D2W-sM-qQ9" id="pAp-rt-2aJ"/>
+                        <outlet property="stepsLabel" destination="a4a-rl-Rp7" id="Z0b-Q1-34h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-142" y="-2"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="pug.jpg" width="500" height="500"/>
+        <image name="restart" width="40" height="40"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>
