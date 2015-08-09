@@ -134,8 +134,9 @@ static const NSInteger TileMaxSize = 6;
                     [validMoves addObject:[NSValue valueWithCGPoint:p]];
             }
         }
-        
-        NSValue *v = validMoves[arc4random_uniform([validMoves count])];
+
+
+        NSValue *v = validMoves[arc4random_uniform((u_int32_t)validMoves.count)];
         CGPoint p = [v CGPointValue];
         [self shouldMove:YES tileAtCoordinate:p];
     }

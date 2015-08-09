@@ -52,7 +52,7 @@ static const NSTimeInterval AnimationSpeed = 0.2;
 {
     _steps = steps;
     
-    self.stepsLabel.text = [NSString stringWithFormat:@"%d", self.steps];
+    self.stepsLabel.text = [NSString stringWithFormat:@"%ld", (long)self.steps];
 }
 
 #pragma mark - Actions
@@ -129,7 +129,7 @@ static const NSTimeInterval AnimationSpeed = 0.2;
     NSLog(@"tile is completed");
     [self showImage];
     
-    NSString *message = [NSString stringWithFormat:@"You've completed a %d x %d puzzle with %d steps. Press restart button to play again.", self.boardSize, self.boardSize, self.steps];
+    NSString *message = [NSString stringWithFormat:@"You've completed a %ld x %ld puzzle with %ld steps. Press restart button to play again.", (long)self.boardSize, (long)self.boardSize, (long)self.steps];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Congrats!" message:message delegate:nil cancelButtonTitle:@"Got it" otherButtonTitles:nil];
     [alert show];
 }
